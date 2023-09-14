@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine-deploy
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: alpine-deploy
+  template:
+    metadata:
+      labels:
+        app: alpine-deploy
+    spec:
+      containers:
+      - name: alpine-container
+        image: alpine:3.7
+        command:
+        - sh
+        - "-c"
+        - "while true; do echo 'Alive'; sleep 600; done"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        startupProbe:
+          exec:
+            command:
+            - "sh"
+            - "-c"
+            - "echo 'checking'"
+          initialDelaySeconds: 5
+          periodSeconds: 5
