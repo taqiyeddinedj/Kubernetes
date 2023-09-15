@@ -17,7 +17,8 @@ node01         Ready    <none>          43m   v1.27.0
 
 ```controlplane ~ ➜  k get pods
 NAME    READY   STATUS    RESTARTS   AGE
-nginx   0/1     Pending   0          3s```
+nginx   0/1     Pending   0          3s
+```
 
 ### Create a deployment with toleration and see if it runs
 
@@ -34,7 +35,8 @@ And with thi toleration th deployment will run on node01
 ```controlplane ~ ➜  k get pods -w
 NAME                                READY   STATUS    RESTARTS   AGE
 nginx                               0/1     Pending   0          4m8s
-taint-toleration-77d579fb4f-dk6f6   1/1     Running   0          7s```
+taint-toleration-77d579fb4f-dk6f6   1/1     Running   0          7s
+```
 
 ### Remove the taint from the node
 Follow up the command with hypehn '-'
