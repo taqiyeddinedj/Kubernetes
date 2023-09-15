@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: taint-toleration
+  name: taint-toleration
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taint-toleration
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: taint-toleration
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+      tolerations:
+      - key: "storage"
+        operator: "Equal"
+        value: "ssd"
+        effect: "NoSchedule"
+status: {}
